@@ -36,4 +36,4 @@ jobs:
         run: hatch run check
       - name: Unit tests 🔍
         if: success() || failure()
-        run: hatch run test:unit
+        run: hatch run test:pytest
