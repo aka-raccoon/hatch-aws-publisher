@@ -74,6 +74,7 @@ This section allows to modify behavior of the plugin. Available options:
 stack_name_append_env = true
 stack_name_prefix = "super-"
 stack_name_suffix = "-man"
+deploy = true
 ```
 
 All above options can be overwritten using a CLI parameter
@@ -82,9 +83,10 @@ All above options can be overwritten using a CLI parameter
 .venv/hatch/bin/hatch publish -p aws -o stack_name_prefix="bat-"
 ```
 
-- *stack_name_prefix*: adds a prefix to a stack name -> `bat-my-app`
-- *stack_name_suffix*: adds a suffix to a stack name -> `bat-my-app-man`
-- *stack_name_append_env*: adds a selected environment to a stack name -> `bat-my-app-man-dev`
+- **stack_name_prefix**: adds a prefix to a stack name -> `bat-my-app`
+- **stack_name_suffix**: adds a suffix to a stack name -> `bat-my-app-man`
+- **stack_name_append_env**: adds a selected environment to a stack name -> `bat-my-app-man-dev`
+- **deploy**: if it's `false`, only sam config will be generated, but `sam deploy` will not be executed
 
 #### section `tool.hatch.publish.aws.sam`
 
