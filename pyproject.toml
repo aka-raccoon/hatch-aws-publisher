@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hatch-aws-publisher"
-version = "0.1.0"
+version = "0.2.0"
 description = 'Hatch plugin for deploying to AWS with SAM'
 readme = "README.md"
 requires-python = ">=3.8"
@@ -108,7 +108,7 @@ filterwarnings = ["ignore:.*are deprecated.*:Warning"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.1.0"
+version = "0.2.0"
 version_files = ["pyproject.toml:^version"]
 tag_format = "$version"
 bump_message = "bump: $current_version → $new_version"
