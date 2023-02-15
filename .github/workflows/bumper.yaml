@@ -28,14 +28,14 @@ jobs:
         with:
           python-version: '3.10'
       - name: Install pumper ⛽︎
-        run: pip install pumper==0.1.0
+        run: pip install pumper==0.2.0
       - name: Create PR 🥘
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pumper create --gh-env --assign
+        run: pumper create --gh-env --assign --label bump
       - name: Merge PR ✅
         env:
           GITHUB_TOKEN: ${{ secrets.PUMPER }}
         run: |
           pumper approve
-          pumper merge
+          pumper merge --method rebase
