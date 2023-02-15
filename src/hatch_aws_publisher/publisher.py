@@ -35,6 +35,9 @@ class SamPublisher(PublisherInterface):
     def publish(self, artifacts: list, options: dict):
         project_config = self.project_config | options
         env = project_config.get("env")
+        deploy = project_config.get("deploy", True)
+        if isinstance(deploy, str):
+            deploy = deploy.lower() == "true"
         sam_config: dict[str, Any] = self.merge_sam_config(env=env)
         if prefix := project_config.get("stack_name_prefix"):
             sam_config["stack_name"] = f"{prefix}{sam_config['stack_name']}"
@@ -51,4 +54,5 @@ class SamPublisher(PublisherInterface):
         sam_config_file: Path = self.root / "samconfig.toml"
         sam_config = {"version": 0.1, "default": {"deploy": {"parameters": sam_config}}}
         sam_config_file.write_text(tomli_w.dumps(sam_config))
-        self.execute(["sam", "deploy"])
+        if deploy:
+            self.execute(["sam", "deploy"])
