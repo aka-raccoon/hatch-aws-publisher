@@ -23,7 +23,7 @@ classifiers = [
 dependencies = ["hatch"]
 
 [project.entry-points.hatch]
-aws = "hatch_aws_publisher.hooks"
+aws-publisher = "hatch_aws_publisher.hooks"
 
 [project.urls]
 Documentation = "https://github.com/aka-raccoon/hatch-aws-publishery#readme"
