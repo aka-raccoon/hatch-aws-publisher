@@ -34,6 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pumper create --gh-env --assign --label bump
       - name: Merge PR ✅
+        if: env.PR_NUM
         env:
           GITHUB_TOKEN: ${{ secrets.PUMPER }}
         run: |
