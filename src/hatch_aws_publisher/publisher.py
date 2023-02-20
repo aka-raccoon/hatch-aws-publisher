@@ -55,5 +55,6 @@ class SamPublisher(PublisherInterface):
         sam_config_file: Path = self.root / "samconfig.toml"
         sam_config = {"version": 0.1, "default": {"deploy": {"parameters": sam_config}}}
         sam_config_file.write_text(tomli_w.dumps(sam_config))
+        self.app.display(f'Stack name: {sam_config["stack_name"]}')
         if deploy:
             self.execute(["sam", "deploy"])
