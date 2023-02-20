@@ -49,8 +49,9 @@ class SamPublisher(PublisherInterface):
         if not "s3_prefix" in sam_config:
             sam_config["s3_prefix"] = sam_config["stack_name"]
 
-        tags = [f"{tag}={value}" for tag, value in sam_config["tags"].items()]
-        sam_config["tags"] = tags
+        tags = [f"{tag}={value}" for tag, value in sam_config.get("tags", {}).items()]
+        if tags:
+            sam_config["tags"] = tags
         sam_config_file: Path = self.root / "samconfig.toml"
         sam_config = {"version": 0.1, "default": {"deploy": {"parameters": sam_config}}}
         sam_config_file.write_text(tomli_w.dumps(sam_config))
