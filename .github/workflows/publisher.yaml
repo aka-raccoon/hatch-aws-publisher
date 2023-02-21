@@ -4,7 +4,7 @@ name: Publisher
 on:
   release:
     types:
-      - published
+      - released
 
 jobs:
   publish:
