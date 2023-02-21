@@ -38,23 +38,23 @@ class SamPublisher(PublisherInterface):
         deploy = project_config.get("deploy", True)
         if isinstance(deploy, str):
             deploy = deploy.lower() == "true"
-        sam_config: dict[str, Any] = self.merge_sam_config(env=env)
+        config: dict[str, Any] = self.merge_sam_config(env=env)
         if prefix := project_config.get("stack_name_prefix"):
-            sam_config["stack_name"] = f"{prefix}{sam_config['stack_name']}"
+            config["stack_name"] = f"{prefix}{config['stack_name']}"
         if suffix := project_config.get("stack_name_suffix"):
-            sam_config["stack_name"] = f"{sam_config['stack_name']}{suffix}"
+            config["stack_name"] = f"{config['stack_name']}{suffix}"
         if project_config.get("stack_name_append_env", False) and env:
-            sam_config["stack_name"] = f"{sam_config['stack_name']}-{env}"
+            config["stack_name"] = f"{config['stack_name']}-{env}"
 
-        if not "s3_prefix" in sam_config:
-            sam_config["s3_prefix"] = sam_config["stack_name"]
+        if not "s3_prefix" in config:
+            config["s3_prefix"] = config["stack_name"]
 
-        tags = [f"{tag}={value}" for tag, value in sam_config.get("tags", {}).items()]
+        tags = [f"{tag}={value}" for tag, value in config.get("tags", {}).items()]
         if tags:
-            sam_config["tags"] = tags
+            config["tags"] = tags
         sam_config_file: Path = self.root / "samconfig.toml"
-        sam_config = {"version": 0.1, "default": {"deploy": {"parameters": sam_config}}}
+        sam_config = {"version": 0.1, "default": {"deploy": {"parameters": config}}}
         sam_config_file.write_text(tomli_w.dumps(sam_config))
-        self.app.display(f'Stack name: {sam_config["stack_name"]}')
+        self.app.display_info(f'Stack name: {config["stack_name"]}')
         if deploy:
             self.execute(["sam", "deploy"])
