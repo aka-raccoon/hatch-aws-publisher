@@ -1,3 +1,9 @@
+## 0.2.3 (2023-02-21)
+
+### Fix
+
+- use display_info method to print stack name
+
 ## 0.2.2 (2023-02-21)
 
 ### Fix
