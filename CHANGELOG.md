@@ -1,3 +1,13 @@
+## 0.2.2 (2023-02-21)
+
+### Fix
+
+- don't raise exception on missing tags
+
+### Refactor
+
+- print stack name
+
 ## 0.2.1 (2023-02-16)
 
 ### Fix
