@@ -1,3 +1,9 @@
+## 0.3.0 (2023-04-19)
+
+### Feat
+
+- move stack name and region to sam config global section
+
 ## 0.2.3 (2023-02-21)
 
 ### Fix
